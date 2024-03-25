@@ -1,0 +1,37 @@
+import nltk
+import random
+from nltk.chat.util import Chat, reflections
+
+# Define patterns for matching user input and corresponding responses
+patterns = [
+    (r'hi|hello|hey', ['Hello!', 'Hi there!', 'Hey!']),
+    (r'how are you', ['I am doing well, thank you!', "I'm good, how about you?"]),
+    (r'what is your name?', ["I'm a chatbot, nice to meet you!"]),
+    (r'what can you do\?', ["I can engage in conversation and provide assistance."]),
+    (r'bye|goodbye', ['Goodbye!', 'Bye!', 'See you later!']),
+    (r'thanks|thank you', ['You\'re welcome!', 'No problem!', 'Anytime!'])
+]
+
+# Create a Chat instance
+chatbot = Chat(patterns, reflections)
+
+# Function to start the conversation
+def start_chat():
+    print("Chatbot: Hi! How can I assist you today?")
+
+    # Chat interaction loop
+    while True:
+        user_input = input("User: ").lower()
+        if user_input == 'quit':
+            print("Chatbot: Goodbye!")
+            break
+        else:
+            response = chatbot.respond(user_input)
+            print("Chatbot:", response)
+
+if __name__ == "__main__":
+    nltk.download('punkt')
+    nltk.download('averaged_perceptron_tagger')
+    
+    # Start the conversation
+    start_chat()
